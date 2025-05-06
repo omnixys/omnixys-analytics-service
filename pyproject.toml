@@ -1,0 +1,89 @@
+[project]
+name = "kpi"
+version = "2025.04.01"
+description = "kpi Microservice mit FastAPI, MongoDB, Keycloak, Kafka, GraphQL"
+readme = "README.md"
+authors = [{ name = "Caleb Gyamfi", email = "caleb-script@outlook.de" }]
+maintainers = [{ name = "Caleb Gyamfi", email = "caleb-script@outlook.de" }]
+requires-python = ">=3.13"
+
+dependencies = [
+  "fastapi[standard]",
+  "hypercorn>=0.17.3",
+  "loguru>=0.7.3",
+  "asyncpg",                    # PostgreSQL-Treiber (async)
+  "psycopg[binary]",            # PostgreSQL-Treiber (sync) inkl. libpq
+  "python-dotenv",              # .env-Verwaltung
+  "pydantic-settings",          # Settings mit Pydantic v2
+  "strawberry-graphql>=0.262.5",        # GraphQL Server
+  "python-keycloak",            # Keycloak Auth
+  "aiokafka",                   # Kafka Client
+  "httpx",                      # Async HTTP Client
+  "openpyxl>=3.1.5",            # Excel-Dateien erstellen
+  "sqlalchemy>=2.0",            # Moderne SQL-ORM
+
+  "pyfiglet>=1.0.2",
+  "python-jose[cryptography]>=3.3.0",
+  "tabulate>=0.9.0",           # Tabellen-Ausgabe
+  "pillow",                   # Bildunterstützung (für Excel oder später CSV)
+]
+
+[project.scripts]
+kpi = "kpi:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.urls]
+homepage = "https://www.gentlecorp-systems.com"
+documentation = "https://readthedocs.org"
+repository = "https://github.com/gentlecorp/kpi"
+changelog = "https://github.com/gentlecorp/kpi/blob/main/CHANGELOG.md"
+
+[dependency-groups]
+build = ["hatch", "hatchling"]
+
+dev = [
+  "pytest",
+  "pytest-asyncio",
+  "pytest-html",
+  "requests",
+  "locust",
+]
+
+doc = [
+  "mkdocs",
+  "mkdocs-material",
+  "mkdocs-material-extensions",
+  "mkdocstrings[python]",
+  "mkdocstrings-python",
+  "griffe",
+  "mistune",
+]
+
+lint = [
+  "ruff",
+  "safety",
+  "vulture",
+  "types-tabulate",
+]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/kpi"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/kpi"]
+
+[tool.uv]
+default-groups = "all"
+
+
+# [tool.deptry]
+# ignore_obsolete = ["src/__init__.py"]
+# exclude = ["tests", "docs"]
+
+# [vulture]
+# min_confidence = 80
+# ignore_names = ["app", "router", "BaseModel"]
+# exclude = ["tests", "docs"]
