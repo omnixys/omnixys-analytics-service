@@ -1,35 +1,52 @@
 [project]
-name = "kpi"
+name = "analytics"
 version = "2025.04.01"
-description = "kpi Microservice mit FastAPI, MongoDB, Keycloak, Kafka, GraphQL"
+description = "analytics Microservice mit FastAPI, MongoDB, Keycloak, Kafka, GraphQL"
 readme = "README.md"
 authors = [{ name = "Caleb Gyamfi", email = "caleb-script@outlook.de" }]
 maintainers = [{ name = "Caleb Gyamfi", email = "caleb-script@outlook.de" }]
 requires-python = ">=3.13"
 
 dependencies = [
-  "fastapi[standard]",
-  "hypercorn>=0.17.3",
-  "loguru>=0.7.3",
-  "asyncpg",                    # PostgreSQL-Treiber (async)
-  "psycopg[binary]",            # PostgreSQL-Treiber (sync) inkl. libpq
-  "python-dotenv",              # .env-Verwaltung
-  "pydantic-settings",          # Settings mit Pydantic v2
-  "strawberry-graphql>=0.262.5",        # GraphQL Server
-  "python-keycloak",            # Keycloak Auth
-  "aiokafka",                   # Kafka Client
-  "httpx",                      # Async HTTP Client
-  "openpyxl>=3.1.5",            # Excel-Dateien erstellen
-  "sqlalchemy>=2.0",            # Moderne SQL-ORM
+       # --- Kafka ---
+    "aiokafka",                        # Kafka Client
+    "orjson",                          # Schnellere JSON bib
 
-  "pyfiglet>=1.0.2",
-  "python-jose[cryptography]>=3.3.0",
-  "tabulate>=0.9.0",           # Tabellen-Ausgabe
-  "pillow",                   # Bildunterstützung (für Excel oder später CSV)
+    # --- Web & Core ---
+    "beanie",                          # ODM für MongoDB mit Pydantic-Unterstützung
+    "fastapi[standard]",
+    "motor",                           # MongoDB async Treiber
+    "python-dotenv",                    # .env-Verwaltung
+    "pydantic-settings",            # Settings mit Pydantic v2
+
+    # --- GraphQL (falls benötigt) ---
+    "strawberry-graphql[federation]>=0.262.5",   # GraphQL Server
+
+    # --- Auth ---
+    "python-jose[cryptography]>=3.3.0",    # JWT Verifikation
+    "python-keycloak",                     # Keycloak Auth
+
+    # --- Observability ---
+    "loguru>=0.7.3",
+    "opentelemetry-api>=1.14.0",
+    "opentelemetry-exporter-otlp",   # OTLP Export zu Tempo
+    "opentelemetry-exporter-prometheus", # Prometheus Export
+    "opentelemetry-instrumentation-fastapi>=0.46b0",
+    "opentelemetry-instrumentation-pymongo",
+    "opentelemetry-sdk>=1.14.0",
+    "prometheus-fastapi-instrumentator",
+
+    # "httpx",                           # Async HTTP Client
+    "hypercorn>=0.17.3",              # ASGI Server
+    "openpyxl>=3.1.5",                # Excel-Export
+    "pillow",                          # Image Support für Excel-Export
+    "pyfiglet>=1.0.2",
+    "tabulate>=0.9.0",
+    "uvicorn>=0.22.0",
 ]
 
 [project.scripts]
-kpi = "kpi:main"
+analytics = "analytics:main"
 
 [build-system]
 requires = ["hatchling"]
@@ -38,8 +55,8 @@ build-backend = "hatchling.build"
 [project.urls]
 homepage = "https://www.gentlecorp-systems.com"
 documentation = "https://readthedocs.org"
-repository = "https://github.com/gentlecorp/kpi"
-changelog = "https://github.com/gentlecorp/kpi/blob/main/CHANGELOG.md"
+repository = "https://github.com/gentlecorp/analytics"
+changelog = "https://github.com/gentlecorp/analytics/blob/main/CHANGELOG.md"
 
 [dependency-groups]
 build = ["hatch", "hatchling"]
@@ -70,10 +87,10 @@ lint = [
 ]
 
 [tool.hatch.build.targets.sdist]
-include = ["src/kpi"]
+include = ["src/analytics"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/kpi"]
+packages = ["src/analytics"]
 
 [tool.uv]
 default-groups = "all"

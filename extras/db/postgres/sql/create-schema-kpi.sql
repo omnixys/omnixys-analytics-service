@@ -1,6 +1,6 @@
-    --    psql --dbname=bitnami_keycloak --username=bn_keycloak --file=/sql/kpi/create-db-kpi.sql
-    --    psql --dbname=kpi_db --username=kpi_db_user --file=/sql/kpi/create-schema-kpi.sql
+    --    psql --dbname=bitnami_keycloak --username=bn_keycloak --file=/sql/analytics/create-db-analytics.sql
+    --    psql --dbname=analytics_db --username=analytics_db_user --file=/sql/analytics/create-schema-analytics.sql
 
-CREATE SCHEMA IF NOT EXISTS kpi_schema AUTHORIZATION kpi_db_user;
+CREATE SCHEMA IF NOT EXISTS analytics_schema AUTHORIZATION analytics_db_user;
 
-ALTER ROLE kpi_db_user SET search_path = 'kpi_schema';
+ALTER ROLE analytics_db_user SET search_path = 'analytics_schema';

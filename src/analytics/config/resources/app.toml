@@ -1,0 +1,17 @@
+[app.server]
+# asgi = "uvicorn"
+asgi = "hypercorn"
+# host-binding = "0.0.0.0"
+port = 7303
+
+[app.dev]
+# z.B. DB neu laden
+enabled = true
+
+[analytics.excel]
+enabled = true
+
+[app.graphql]
+# locust: auskommentieren
+graphiql-enabled = true
+

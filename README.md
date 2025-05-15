@@ -89,7 +89,7 @@ http://localhost:7303/graphql
 
 ## 📄 Export API (REST)
 
-- `GET /export/products/<filename>` → CSV/Excel-Datei mit Diagrammen & Logo
+- `GET /export/analyticss/<filename>` → CSV/Excel-Datei mit Diagrammen & Logo
 
 ---
 

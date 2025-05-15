@@ -1,11 +1,11 @@
--- psql --dbname=bitnami_keycloak --username=bn_keycloak --file=/sql/kpi/create-db-kpi.sql
--- psql --dbname=kpi_db --username=kpi_db_user --file=/sql/kpi/create-schema-kpi.sql
+-- psql --dbname=bitnami_keycloak --username=bn_keycloak --file=/sql/analytics/create-db-analytics.sql
+-- psql --dbname=analytics_db --username=analytics_db_user --file=/sql/analytics/create-schema-analytics.sql
 
 
-CREATE ROLE kpi_db_user LOGIN PASSWORD 'GentleCorp16.04.2025';
+CREATE ROLE analytics_db_user LOGIN PASSWORD 'GentleCorp16.04.2025';
 
-CREATE DATABASE kpi_db;
+CREATE DATABASE analytics_db;
 
-GRANT ALL ON DATABASE kpi_db TO kpi_db_user;
+GRANT ALL ON DATABASE analytics_db TO analytics_db_user;
 
-CREATE TABLESPACE kpispace OWNER kpi_db_user LOCATION '/var/lib/postgresql/tablespace/kpi';
+CREATE TABLESPACE analyticsspace OWNER analytics_db_user LOCATION '/var/lib/postgresql/tablespace/analytics';
