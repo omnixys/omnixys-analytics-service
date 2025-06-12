@@ -4,7 +4,7 @@ from analytics.config import env
 
 
 class KafkaSettings(BaseSettings):
-    bootstrap_servers: str = "localhost:9092"
+    bootstrap_servers: str = env.KAFKA_URI
     topic_log: str = "logstream.log.analytics"
     client_id: str = env.PROJECT_NAME
 

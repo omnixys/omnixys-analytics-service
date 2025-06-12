@@ -6,6 +6,7 @@ from aiokafka import AIOKafkaConsumer
 from loguru import logger
 import asyncio, json
 
+from analytics.config import env
 from analytics.messaging.kafka_event_dispatcher import KafkaEventDispatcher
 
 class KafkaConsumerService:
@@ -15,7 +16,7 @@ class KafkaConsumerService:
         self,
         dispatcher: KafkaEventDispatcher,
         topics: list[str],
-        bootstrap_servers: str = "localhost:9092",
+        bootstrap_servers: str = env.KAFKA_URI,
     ):
         self.dispatcher = dispatcher
         self.topics = topics

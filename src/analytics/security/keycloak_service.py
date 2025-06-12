@@ -5,6 +5,8 @@ import os
 import httpx
 from loguru import logger
 
+from analytics.config import env
+
 
 class KeycloakService:
     """
@@ -77,9 +79,9 @@ class KeycloakService:
         """
         Dekodiert und verifiziert das JWT mithilfe der JWKS von Keycloak.
         """
-        realm = os.getenv("KC_SERVICE_REALM", "gentlecorp")
-        host = os.getenv("KC_SERVICE_HOST", "localhost")
-        port = os.getenv("KC_SERVICE_PORT", "18080")
+        realm = env.KC_SERVICE_REALM
+        host = env.KC_SERVICE_REALM
+        port = env.KC_SERVICE_PORT
 
         jwks_url = (
             f"http://{host}:{port}/auth/realms/{realm}/protocol/openid-connect/certs"

@@ -1,6 +1,7 @@
 # analytics/messaging/kafka_singleton.py
 
 from typing import Optional
+from analytics.config import env
 from analytics.messaging.kafka_consumer_service import KafkaConsumerService
 from analytics.messaging.kafka_event_dispatcher import KafkaEventDispatcher
 from analytics.messaging.kafka_handler_registration import register_kafka_handlers
@@ -27,5 +28,5 @@ async def get_kafka_consumer() -> KafkaConsumerService:
     return KafkaConsumerService(
         dispatcher=dispatcher,
         topics=dispatcher.list_topics(),
-        bootstrap_servers="localhost:9092",
+        bootstrap_servers=env.KAFKA_URI,
     )

@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any, Final
 
 from fastapi import FastAPI, HTTPException, Request, Response, status
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from loguru import logger
 from prometheus_fastapi_instrumentator import Instrumentator
@@ -19,6 +20,8 @@ from analytics.graphql.schema import graphql_router
 from analytics.messaging.kafka_producer_service import KafkaProducerService
 from analytics.messaging.kafka_singleton import get_kafka_consumer, get_kafka_producer
 from analytics.security.keycloak_service import KeycloakService
+
+from analytics.health.router import router as health_router
 
 from .banner import banner
 
@@ -65,12 +68,19 @@ else:
     app: Final = FastAPI(lifespan=lifespan)
 
 
-# Setup Observability
-setup_otel(app)  # Tracing mit Tempo
-Instrumentator().instrument(app).expose(app)  # Prometheus-Metriken
 # --------------------------------------------------------------------------------------
-# R E S T
+# M I D D L E W A R E
 # --------------------------------------------------------------------------------------
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # oder ["http://localhost:3000"] etc.
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 @app.middleware("http")
 async def inject_keycloak(request: Request, call_next):
     # Sonderfall: Introspection oder kein Token
@@ -91,6 +101,15 @@ async def inject_keycloak(request: Request, call_next):
         request.state.keycloak = None  # sicherstellen, dass Attribut gesetzt ist
 
     return await call_next(request)
+
+
+# Setup Observability
+setup_otel(app)  # Tracing mit Tempo
+Instrumentator().instrument(app).expose(app)  # Prometheus-Metriken
+# --------------------------------------------------------------------------------------
+# R E S T
+# --------------------------------------------------------------------------------------
+app.include_router(health_router)
 
 
 # --------------------------------------------------------------------------------------

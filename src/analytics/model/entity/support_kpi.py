@@ -5,9 +5,9 @@ from analytics.model.entity.base import BaseKPI, BaseKPIType
 
 @strawberry.type
 class SupportKPIType(BaseKPIType):
-    total_orders: int
-    basket_size_sum: float
-    order_value_sum: float
+    avg_response_time_total: float
+    support_requests: int
+    request_count: int
 
 
 class SupportKPI(BaseKPI):
