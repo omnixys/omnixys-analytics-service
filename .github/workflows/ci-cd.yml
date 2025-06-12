@@ -228,12 +228,12 @@ jobs:
 
             - name: Generate CycloneDX SBOM for Python
               run: |
-                  pip install uv
-                  uv venv .venv
-                  source .venv/bin/activate
-                  uv sync --all-groups
-                  uv add cyclonedx-bom
-                  cyclonedx-py -e -j -o sbom.json
+                pip install uv
+                uv venv .venv
+                .venv/bin/uv sync --all-groups
+                .venv/bin/pip install cyclonedx-bom
+                .venv/bin/python -m cyclonedx_py -e -j -o sbom.json
+
 
             - name: Upload SBOM (CycloneDX)
               uses: actions/upload-artifact@v4
