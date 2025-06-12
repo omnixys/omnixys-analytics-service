@@ -127,7 +127,14 @@ build = [
     { name = "hatchling" },
 ]
 dev = [
+    { name = "ghp-import" },
     { name = "locust" },
+    { name = "mkdocs" },
+    { name = "mkdocs-build-plantuml-plugin" },
+    { name = "mkdocs-get-deps" },
+    { name = "mkdocs-material" },
+    { name = "mkdocs-material-extensions" },
+    { name = "mkdocstrings", extra = ["python"] },
     { name = "pytest" },
     { name = "pytest-asyncio" },
     { name = "pytest-html" },
@@ -184,7 +191,14 @@ build = [
     { name = "hatchling" },
 ]
 dev = [
+    { name = "ghp-import", specifier = ">=2.1.0" },
     { name = "locust" },
+    { name = "mkdocs", specifier = ">=1.6.1" },
+    { name = "mkdocs-build-plantuml-plugin", specifier = ">=1.11.0" },
+    { name = "mkdocs-get-deps", specifier = ">=0.2.0" },
+    { name = "mkdocs-material", specifier = ">=9.6.11" },
+    { name = "mkdocs-material-extensions", specifier = ">=1.3.1" },
+    { name = "mkdocstrings", extras = ["python"], specifier = ">=0.29.1" },
     { name = "pytest" },
     { name = "pytest-asyncio" },
     { name = "pytest-html" },
@@ -911,6 +925,18 @@ wheels = [
 ]
 
 [[package]]
+name = "httplib2"
+version = "0.22.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pyparsing" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/3d/ad/2371116b22d616c194aa25ec410c9c6c37f23599dcd590502b74db197584/httplib2-0.22.0.tar.gz", hash = "sha256:d7a10bc5ef5ab08322488bde8c726eeee5c8618723fdb399597ec58f3d82df81", size = 351116 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a8/6c/d2fbdaaa5959339d53ba38e94c123e4e84b8fbc4b84beb0e70d7c1608486/httplib2-0.22.0-py3-none-any.whl", hash = "sha256:14ae0a53c1ba8f3d37e9e27cf37eabb0fb9980f435ba405d546948b009dd64dc", size = 96854 },
+]
+
+[[package]]
 name = "httptools"
 version = "0.6.4"
 source = { registry = "https://pypi.org/simple" }
@@ -1281,6 +1307,19 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/c2/44/140469d87379c02f1e1870315f3143718036a983dd0416650827b8883192/mkdocs_autorefs-1.4.1.tar.gz", hash = "sha256:4b5b6235a4becb2b10425c2fa191737e415b37aa3418919db33e5d774c9db079", size = 4131355 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f8/29/1125f7b11db63e8e32bcfa0752a4eea30abff3ebd0796f808e14571ddaa2/mkdocs_autorefs-1.4.1-py3-none-any.whl", hash = "sha256:9793c5ac06a6ebbe52ec0f8439256e66187badf4b5334b5fde0b128ec134df4f", size = 5782047 },
+]
+
+[[package]]
+name = "mkdocs-build-plantuml-plugin"
+version = "1.11.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "httplib2" },
+    { name = "mkdocs" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/a8/f8/e00b685ad5390a617a2e5325ebd14103fdfbd35c3d8a74810752f306d086/mkdocs-build-plantuml-plugin-1.11.0.tar.gz", hash = "sha256:3e894ab71e75f37f8c5236dbe4e63d938312bfa7a5fc2489cf9347a659db41f8", size = 8933 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/23/c3/4e670e59e5edf8c4c136bee1604dd149e2b4c393b4266cdb10c7a93aefac/mkdocs_build_plantuml_plugin-1.11.0-py3-none-any.whl", hash = "sha256:528e883a7e5485576b60a51e22dc0232d31e5ae7c19640f9dc201f655e9ce0f5", size = 9318 },
 ]
 
 [[package]]
@@ -2017,6 +2056,15 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/17/a7/0358efc8dba796545e9bd4642d1337a9b67b60928c583799fb0726594855/pymongo-4.13.0-cp313-cp313t-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:82c36928c1c26580ce4f2497a6875968636e87c77108ff253d76b1355181a405", size = 2219131 },
     { url = "https://files.pythonhosted.org/packages/58/d5/373cd1cd21eff769e22e4e0924dcbfd770dfa1298566d51a7097857267fc/pymongo-4.13.0-cp313-cp313t-win32.whl", hash = "sha256:1397eac713b84946210ab556666cfdd787eee824e910fbbe661d147e110ec516", size = 975711 },
     { url = "https://files.pythonhosted.org/packages/b0/39/1e204091bdf264a0d9eccc21f7da099903a7a30045f055a91178686c0259/pymongo-4.13.0-cp313-cp313t-win_amd64.whl", hash = "sha256:99a52cfbf31579cc63c926048cd0ada6f96c98c1c4c211356193e07418e6207c", size = 1004287 },
+]
+
+[[package]]
+name = "pyparsing"
+version = "3.2.3"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/bb/22/f1129e69d94ffff626bdb5c835506b3a5b4f3d070f17ea295e12c2c6f60f/pyparsing-3.2.3.tar.gz", hash = "sha256:b9c13f1ab8b3b542f72e28f634bad4de758ab3ce4546e4301970ad6fa77c38be", size = 1088608 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/05/e7/df2285f3d08fee213f2d041540fa4fc9ca6c2d44cf36d3a035bf2a8d2bcc/pyparsing-3.2.3-py3-none-any.whl", hash = "sha256:a749938e02d6fd0b59b356ca504a24982314bb090c383e3cf201c95ef7e2bfcf", size = 111120 },
 ]
 
 [[package]]
