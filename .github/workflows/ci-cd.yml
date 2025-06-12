@@ -13,6 +13,7 @@ on:
 permissions:
     contents: read
     id-token: write # ← WICHTIG für Cosign ohne Schlüssel (keyless signing)
+    packages: write # Für GitHub Container Registry (ghcr.io)
 
 env:
     COSIGN_EXPERIMENTAL: "true"
@@ -227,9 +228,10 @@ jobs:
 
             - name: Generate CycloneDX SBOM for Python
               run: |
-                  pip install cyclonedx-bom
-                  cyclonedx-py -e -j -o sbom.json
-
+                pip install cyclonedx-bom
+                source .venv/bin/activate
+                cyclonedx-py env -o sbom.json -j
+                
             - name: Upload SBOM (CycloneDX)
               uses: actions/upload-artifact@v4
               with:
