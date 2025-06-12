@@ -223,17 +223,16 @@ jobs:
 
             - name: Sign Docker Image with cosign (OIDC/GitHub)
               run: |
-                  cosign sign --yes ${{ env.IMAGE_NAME }}:${{ env.CURRENT_DATE }}
-                  cosign sign --yes ${{ env.IMAGE_NAME }}:latest
+                cosign sign --yes ${{ env.IMAGE_NAME }}:${{ env.CURRENT_DATE }}
+                cosign sign --yes ${{ env.IMAGE_NAME }}:latest
 
             - name: Generate CycloneDX SBOM for Python
               run: |
                 pip install cyclonedx-bom
-                source .venv/bin/activate
-                cyclonedx-py env -o sbom.json -j
-                
+                .venv/bin/python -m cyclonedx_py env -o sbom.json -j
+
             - name: Upload SBOM (CycloneDX)
               uses: actions/upload-artifact@v4
               with:
-                  name: sbom-cyclonedx
-                  path: sbom.json
+                name: sbom-cyclonedx
+                path: sbom.json
