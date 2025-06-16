@@ -114,7 +114,7 @@ jobs:
             REVISION=${{ github.sha }}
             CREATED=${{ vars.CURRENT_DATE }}
             APP_VERSION=${{ vars.CURRENT_DATE }}
-            APP_NAME=${{ secrets.SERVICE }}-service
+            APP_NAME=${{ secrets.SERVICE }}
             PYTHON_MAIN_VERSION=${{ matrix.python-version }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
